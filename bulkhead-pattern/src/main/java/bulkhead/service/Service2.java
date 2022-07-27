@@ -7,8 +7,8 @@ import org.springframework.stereotype.Component;
 public class Service2 {
 	
 	public String doSomework() {
-		System.out.println("Excecuting service 2..");
-		pause(500);
+		System.out.println(Thread.currentThread().getName() + " " + "Excecuting service 2..");
+		pause(3000);
 		
 		return "service 2 ok";
 	}

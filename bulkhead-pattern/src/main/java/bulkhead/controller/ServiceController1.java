@@ -16,7 +16,7 @@ public class ServiceController1 {
 	
 	@GetMapping("/service1")
 	public String service1() {
-		
+	
 		return serv1.doSomeWork();
 	}
 }
