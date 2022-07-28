@@ -11,11 +11,10 @@ public class Service1 {
 	@Autowired
 	private RestTemplate restTemplate;
 	
-	@Autowired
-	private ServerProperties serverProperties;
+	
 	
 	public String doSomeWork() {
-		System.out.println("Excecuting service 1.." + serverProperties.getTomcat().getMaxThreads());
+		System.out.println("Excecuting service 1..");
 		ResponseEntity<String> response = 
 				restTemplate.getForEntity("http://localhost:8080/service2",String.class);
 		
