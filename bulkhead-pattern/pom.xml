@@ -28,8 +28,7 @@
 		<finalName>${artifactId}</finalName>
 	</build>
 
-	<!-- esto se agrega para poder deployar la aplicación en servidor tomcat -->
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 
 
 
@@ -38,15 +37,8 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-web</artifactId>
-
 		</dependency>
 
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-tomcat</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
@@ -63,6 +55,26 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+
+
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-core</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+		
+		<dependency>
+			<groupId>io.micrometer</groupId>
+			<artifactId>micrometer-registry-influx</artifactId>
+			<version>1.9.2</version>
+		</dependency>
+
+
+
+
+		<!-- para monitorear el servidor <dependency> <groupId>net.bull.javamelody</groupId> 
+			<artifactId>javamelody-spring-boot-starter</artifactId> <version>1.91.0</version> 
+			</dependency> -->
 	</dependencies>
 
 </project>
