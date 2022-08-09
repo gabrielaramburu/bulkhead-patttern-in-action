@@ -5,22 +5,20 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import bulkhead.service.Service1;
-import io.micrometer.core.annotation.Counted;
+import bulkhead.service.Service4;
 import io.micrometer.core.annotation.Timed;
 
 @Controller
-@ResponseBody  
-public class ServiceController1 {
+@ResponseBody   //these two annotation is equivalent to use @RestController
+public class ServiceController4 {
 	
 	@Autowired
-	private Service1 serv1;
+	private Service4 serv4;
 	
-	@Timed("request.service1.timed")
-	@Counted(value = "request.service1.counted")
-	@GetMapping("/service1")
+	@Timed("request.service4.timed")
+	@GetMapping("/service4")
 	public String service1() {
 	
-		return serv1.doSomeWork();
+		return serv4.doSomeWork();
 	}
 }

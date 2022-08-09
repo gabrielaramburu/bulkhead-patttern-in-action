@@ -1,25 +1,20 @@
 package bulkhead.service;
 
-import java.util.Random;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.ServerProperties;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
-
-import bulkhead.model.Config;
+import org.springframework.web.client.RestTemplate;
 
 @Component
-public class Service2 {
+public class Service4 {
 	
-	@Autowired
-	private Config config;
-	
-	public String doSomework() {
-		System.out.println("Excecuting service 2, delay: " + config.getPause());
+	public String doSomeWork() {
+		System.out.println("Excecuting service 4..");
 		System.out.println(Thread.currentThread().getName());
 		
-		pause(config.getPause());
-		
-		return "service 2 ok";
+		pause(2);
+		return "service 4 ok, ";
 	}
 	
 	private void pause(long milis) {
@@ -29,5 +24,4 @@ public class Service2 {
 			e.printStackTrace();
 		}
 	}
-	
 }

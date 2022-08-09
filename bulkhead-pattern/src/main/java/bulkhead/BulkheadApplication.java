@@ -8,11 +8,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
-public class BulkheadApplication { //extends SpringBootServletInitializer {
+public class BulkheadApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(BulkheadApplication.class, args);
-		System.out.println("Ejecutando...");
+		System.out.println("Executing server...");
 	}
 
 	@Bean
@@ -20,8 +20,4 @@ public class BulkheadApplication { //extends SpringBootServletInitializer {
 		return new RestTemplate();
 	}
 
-//	@Override
-//	protected SpringApplicationBuilder configure(SpringApplicationBuilder builder) {
-//		return builder.sources(BulkheadApplication.class);
-//	}
 }

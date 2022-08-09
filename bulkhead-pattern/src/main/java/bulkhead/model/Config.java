@@ -1,13 +1,19 @@
 package bulkhead.model;
 
 import org.springframework.boot.autoconfigure.web.ServerProperties;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.EnableAspectJAutoProxy;
 
-@Component
+import io.micrometer.core.aop.CountedAspect;
+import io.micrometer.core.instrument.MeterRegistry;
+
+@Configuration
+@EnableAspectJAutoProxy(proxyTargetClass = true) //I had to add this because @Counted annotation did not work 
 public class Config {
-	
+
 	private int pause;
-	
+
 	public Config() {
 		this.pause = 2;
 	}
@@ -19,7 +25,7 @@ public class Config {
 	public void setPause(int pause) {
 		this.pause = pause;
 	}
-	
+
 	public String showConfig(ServerProperties serverProperties) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("MaxThreads:");
@@ -40,9 +46,16 @@ public class Config {
 		sb.append(" ***** ");
 		sb.append("pause:");
 		sb.append(this.getPause());
-		
+
 		sb.append("\n");
-		
+
 		return sb.toString();
+	}
+	
+	
+	//I had to add this because @Counted annotation did not work
+	@Bean
+	CountedAspect countedAspect(MeterRegistry registry) {
+		return new CountedAspect(registry);
 	}
 }

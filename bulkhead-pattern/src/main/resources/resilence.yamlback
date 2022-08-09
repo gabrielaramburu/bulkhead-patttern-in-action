@@ -1,0 +1,28 @@
+#semaphore type
+resilience4j.bulkhead:
+  instances:
+    Service1:
+      maxConcurrentCalls: 1
+      maxWaitDuration: 100ms
+      
+
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      slidingWindowType: COUNT_BASED
+      slidingWindowSize: 100
+      permittedNumberOfCallsInHalfOpenState: 10
+      waitDurationInOpenState: 60000
+      
+      #when 60 percentage of request fail the circuit changes to open
+      failureRateThreshold: 60 
+      recordExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+  instances:
+    Service1:
+      baseConfig: default
+      
+      
+
+
+      
