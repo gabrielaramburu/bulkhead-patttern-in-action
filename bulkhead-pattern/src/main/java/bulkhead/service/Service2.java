@@ -14,8 +14,8 @@ public class Service2 {
 	private Config config;
 	
 	public String doSomework() {
-		System.out.println("Excecuting service 2, delay: " + config.getPause());
-		System.out.println(Thread.currentThread().getName());
+		System.out.println("Excecuting service 2, delay: " + config.getPause() 
+		+ " " +Thread.currentThread().getName());
 		
 		pause(config.getPause());
 		

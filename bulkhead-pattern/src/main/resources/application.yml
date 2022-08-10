@@ -1,11 +1,3 @@
-#semaphore type
-resilience4j.bulkhead:
-  instances:
-    Service1:
-      maxConcurrentCalls: 1
-      maxWaitDuration: 100ms
-      
-
 resilience4j.circuitbreaker:
   configs:
     default:
@@ -22,7 +14,15 @@ resilience4j.circuitbreaker:
     Service1:
       baseConfig: default
       
-      
+resilience4j.thread-pool-bulkhead:
+    instances:
+        Service2:
+            maxThreadPoolSize: 2
+            coreThreadPoolSize: 1
+            queueCapacity: 1
 
-
-      
+resilience4j.bulkhead:
+    instances:
+        Service2b:
+            maxConcurrentCalls: 2
+            maxWaitDuration: 10ms

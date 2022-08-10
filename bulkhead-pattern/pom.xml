@@ -68,9 +68,8 @@
 			<version>1.7.1</version>
 		</dependency>
 
-
-		<!-- I had to add this because @Counted annotation did not work, 
-		 nested exception is java.lang.NoClassDefFoundError: org/aspectj/lang/annotation/Pointcut -->
+		<!-- I had to add this because @Counted annotation did not work, nested 
+			exception is java.lang.NoClassDefFoundError: org/aspectj/lang/annotation/Pointcut -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-aop</artifactId>
