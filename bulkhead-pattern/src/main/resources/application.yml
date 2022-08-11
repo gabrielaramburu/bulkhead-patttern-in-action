@@ -16,13 +16,13 @@ resilience4j.circuitbreaker:
       
 resilience4j.thread-pool-bulkhead:
     instances:
-        Service2:
+        Service1b:
             maxThreadPoolSize: 2
             coreThreadPoolSize: 1
             queueCapacity: 1
 
 resilience4j.bulkhead:
     instances:
-        Service2b:
+        Service1:
             maxConcurrentCalls: 2
             maxWaitDuration: 10ms

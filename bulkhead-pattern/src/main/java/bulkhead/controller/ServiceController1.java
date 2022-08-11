@@ -1,9 +1,11 @@
 package bulkhead.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.server.ResponseStatusException;
 
 import bulkhead.service.Service1;
 import io.micrometer.core.annotation.Counted;
@@ -17,10 +19,10 @@ public class ServiceController1 {
 	private Service1 serv1;
 	
 	private enum InvocationType {
-		SIMPLE, CIRCUIT_BRAKER, BULKHEAD;
+		SIMPLE_CALL, CIRCUIT_BRAKER, BULKHEAD;
 	}
 	
-	private final InvocationType invocation = InvocationType.BULKHEAD;
+	private final InvocationType invocation = InvocationType.SIMPLE_CALL;
 	
 	@Timed("request.service1.timed")
 	@Counted(value = "request.service1.counted")
@@ -37,6 +39,10 @@ public class ServiceController1 {
 			response = serv1.doSomeWork();
 		}
 		
+		if (response.equals("error")) {
+			 throw new ResponseStatusException(
+			           HttpStatus.TOO_MANY_REQUESTS, "Too many request");
+		}
 		return response;
 	}
 }

@@ -1,4 +1,4 @@
-package bulkhead.model;
+package bulkhead.service.util;
 
 import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.stereotype.Component;

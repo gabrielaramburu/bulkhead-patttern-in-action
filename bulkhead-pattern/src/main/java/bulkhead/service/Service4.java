@@ -2,22 +2,17 @@ package bulkhead.service;
 
 import org.springframework.stereotype.Component;
 
+import bulkhead.service.util.Util;
+
 @Component
 public class Service4 {
 	
 	public String doSomeWork() {
-		System.out.println("Excecuting service 4..");
-		System.out.println(Thread.currentThread().getName());
+		System.out.println("Excecuting service 4.." 
+				+ " " + Thread.currentThread().getName());
 		
-		pause(2);
+		Util.pause(5);
 		return "service 4 ok, ";
 	}
 	
-	private void pause(long milis) {
-		try {
-			Thread.sleep(milis);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
-	}
 }

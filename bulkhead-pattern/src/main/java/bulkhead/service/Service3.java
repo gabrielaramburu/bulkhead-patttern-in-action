@@ -6,6 +6,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import bulkhead.service.util.Util;
+
 @Component
 public class Service3 {
 	@Autowired
@@ -14,8 +16,12 @@ public class Service3 {
 
 	public String doSomeWork() {
 		System.out.println("Excecuting service 3..");
+		Util.pause(5);
+		
+		
 		ResponseEntity<String> response = 
 				restTemplate.getForEntity("http://localhost:8080/service4",String.class);
+		
 		
 		return "service 3 ok, " + response.getBody();
 	}

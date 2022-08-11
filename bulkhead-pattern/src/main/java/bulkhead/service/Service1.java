@@ -5,7 +5,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
-import bulkhead.model.InfluxDBRegister;
+import bulkhead.service.util.InfluxDBRegister;
+import bulkhead.service.util.Util;
 import io.github.resilience4j.bulkhead.BulkheadFullException;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
@@ -24,9 +25,10 @@ public class Service1 {
 		return callService2();
 	}
 	
-	@Bulkhead(name = "Service2b", fallbackMethod = "bulkheadFallBackMethod")
+	@Bulkhead(name = "Service1", fallbackMethod = "bulkheadFallBackMethod")
 	public String doSomeWorkUsingBulkhead() {
 		System.out.println("Using bulkhead pattern");
+		Util.pause(5);
 		return callService2();
 	}
 	
@@ -46,6 +48,7 @@ public class Service1 {
 	public void circuitBreakerFallBackMethod(Throwable throwable ) {
 		System.out.println("Circuti Breaker fallback: Failed to send the request: " + throwable.getMessage());
 	}
+	
 	
 	private String callService2() {
 		ResponseEntity<String> response = 
