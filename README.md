@@ -1,15 +1,22 @@
 # Bulkhead pattern in action.
 
-It is a application that reproduces de problem that the pattern solves and also shows the behavior of the application after to use the pattern.
+It is a application that reproduces de problem that the pattern solves and also shows the behavior of the application after apply the pattern.
 
 Using Jmeter I put some load on a Tomcat server.
+
 <img src="https://user-images.githubusercontent.com/63823685/185599850-5bbbc731-bf0d-4db7-ac1b-2a4811deaf5f.png"  width=50% height=50%>
 
 After to simulate a problem in one application's service, the Server starts to run out of available resources and soon It can not process all the incoming requests. As a result the entire application fails due to a particular service error.
 
 <img src="https://user-images.githubusercontent.com/63823685/185599383-5f244f52-2d75-41ff-a541-cb2854672053.png"  width=50% height=50%>
 
-After to use an implementation of bulkhed pattern, the application keeps working well, just the client of the service that fails are affected.
+Clinet A and B are affected by the problem on service 2.
+
+<img src="https://user-images.githubusercontent.com/63823685/185605726-87156485-3feb-4a37-82be-233b661ab93f.png"  width=50% height=50%>
+
+<img src="https://user-images.githubusercontent.com/63823685/185605888-3f9ba963-d0ef-4878-9634-c6f3fb82ddcb.png"  width=50% height=50%>
+
+After to use an implementation of bulkhed pattern, the application keeps working well, just the client of the service that fails is affected.
 
 <img src="https://user-images.githubusercontent.com/63823685/185600505-9c789c51-cfe6-42e7-a318-67fadc5324ee.png"  width=50% height=50%>
 
