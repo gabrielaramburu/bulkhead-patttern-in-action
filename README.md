@@ -16,7 +16,7 @@ Clinet A and B are affected by the problem on service 2.
 
 <img src="https://user-images.githubusercontent.com/63823685/185605888-3f9ba963-d0ef-4878-9634-c6f3fb82ddcb.png"  width=50% height=50%>
 
-After to use an implementation of bulkhed pattern, the application keeps working well, just the client of the service that fails is affected.
+After to use an implementation of bulkhed pattern, the application keeps working well, just the client (client A) that depends on the service that fails is affected.
 
 <img src="https://user-images.githubusercontent.com/63823685/185600505-9c789c51-cfe6-42e7-a318-67fadc5324ee.png"  width=50% height=50%>
 
