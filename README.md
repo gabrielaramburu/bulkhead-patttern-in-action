@@ -2,6 +2,8 @@
 
 It is a application that reproduces de problem that the pattern solves and also shows the behavior of the application after apply the pattern.
 
+This is the [video](https://youtu.be/KFwmO_iL54s).
+
 Using Jmeter I put some load on a Tomcat server.
 
 <img src="https://user-images.githubusercontent.com/63823685/185599850-5bbbc731-bf0d-4db7-ac1b-2a4811deaf5f.png"  width=50% height=50%>
