@@ -7,7 +7,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.server.ResponseStatusException;
 
+import bulkhead.model.Config;
 import bulkhead.service.Service1;
+import bulkhead.service.util.Util;
 import io.micrometer.core.annotation.Counted;
 import io.micrometer.core.annotation.Timed;
 
@@ -22,13 +24,14 @@ public class ServiceController1 {
 		SIMPLE_CALL, CIRCUIT_BRAKER, BULKHEAD;
 	}
 	
-	private final InvocationType invocation = InvocationType.SIMPLE_CALL;
+	private final InvocationType invocation = InvocationType.BULKHEAD;
 	
 	@Timed("request.service1.timed")
 	@Counted(value = "request.service1.counted")
 	@GetMapping("/service1")
 	public String service1() {
 		String response;
+		Util.pause(Config.DEFAULT_DELAY);
 		if (invocation.equals(InvocationType.BULKHEAD)) {
 			response = serv1.doSomeWorkUsingBulkhead();
 			

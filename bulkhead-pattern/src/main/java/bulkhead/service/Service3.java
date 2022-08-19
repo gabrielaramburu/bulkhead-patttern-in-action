@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
+import bulkhead.model.Config;
 import bulkhead.service.util.Util;
 
 @Component
@@ -16,7 +17,7 @@ public class Service3 {
 
 	public String doSomeWork() {
 		System.out.println("Excecuting service 3..");
-		Util.pause(5);
+		Util.pause(Config.DEFAULT_DELAY);
 		
 		
 		ResponseEntity<String> response = 

@@ -68,7 +68,7 @@
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -133,10 +133,10 @@
         },
         "overrides": []
       },
-      "fill": 0,
+      "fill": 1,
       "fillGradient": 0,
       "gridPos": {
-        "h": 13,
+        "h": 12,
         "w": 8,
         "x": 2,
         "y": 1
@@ -144,6 +144,7 @@
       "hiddenSeries": false,
       "id": 6,
       "legend": {
+        "alignAsTable": false,
         "avg": false,
         "current": false,
         "max": false,
@@ -156,7 +157,7 @@
       "linewidth": 1,
       "nullPointMode": "null",
       "options": {
-        "alertThreshold": true
+        "alertThreshold": false
       },
       "percentage": false,
       "pluginVersion": "7.2.0",
@@ -1004,7 +1005,7 @@
         "orientation": "auto",
         "reduceOptions": {
           "calcs": [
-            "last"
+            "lastNotNull"
           ],
           "fields": "",
           "values": false
@@ -1058,7 +1059,7 @@
       "type": "gauge"
     }
   ],
-  "refresh": "5s",
+  "refresh": false,
   "schemaVersion": 26,
   "style": "dark",
   "tags": [],
@@ -1066,8 +1067,8 @@
     "list": []
   },
   "time": {
-    "from": "now-5m",
-    "to": "now"
+    "from": "2022-07-30T00:20:40.000Z",
+    "to": "2022-07-30T00:21:40.000Z"
   },
   "timepicker": {
     "refresh_intervals": [
@@ -1086,5 +1087,5 @@
   "timezone": "",
   "title": "Bulkhead pattern, scenario I",
   "uid": "mlxfivkVk",
-  "version": 13
+  "version": 23
 }

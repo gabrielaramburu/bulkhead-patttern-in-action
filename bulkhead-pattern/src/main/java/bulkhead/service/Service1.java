@@ -28,7 +28,6 @@ public class Service1 {
 	@Bulkhead(name = "Service1", fallbackMethod = "bulkheadFallBackMethod")
 	public String doSomeWorkUsingBulkhead() {
 		System.out.println("Using bulkhead pattern");
-		Util.pause(5);
 		return callService2();
 	}
 	

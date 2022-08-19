@@ -13,9 +13,10 @@ import io.micrometer.core.instrument.MeterRegistry;
 public class Config {
 
 	private int pause;
+	public final static int DEFAULT_DELAY = 5;
 
 	public Config() {
-		this.pause = 2;
+		this.pause = DEFAULT_DELAY;
 	}
 
 	public int getPause() {
