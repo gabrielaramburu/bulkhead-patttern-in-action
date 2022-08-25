@@ -16,7 +16,8 @@
 	</properties>
 
 	<modules>
-		
+
+	<module>bulkhead-threadPool-semaphore</module>
 	</modules>
 
 

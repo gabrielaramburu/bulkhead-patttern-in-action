@@ -19,6 +19,15 @@ resilience4j.bulkhead:
         Service1:
             maxConcurrentCalls: 2
             maxWaitDuration: 10ms
-
+        Test1:
+            maxConcurrentCalls: 4
+            maxWaitDuration: 10ms
+            
+resilience4j.thread-pool-bulkhead:
+    instances:
+        Test2:
+            coreThreadPoolSize: 4
+            maxThreadPoolSize: 4
+            queueCapacity: 1
             
             

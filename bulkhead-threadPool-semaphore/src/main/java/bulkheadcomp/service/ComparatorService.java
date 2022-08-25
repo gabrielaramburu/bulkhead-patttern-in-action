@@ -1,12 +1,10 @@
 package bulkheadcomp.service;
 
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.RejectedExecutionException;
 
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
-import bulkhead.service.util.Util;
 import io.github.resilience4j.bulkhead.BulkheadFullException;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 
