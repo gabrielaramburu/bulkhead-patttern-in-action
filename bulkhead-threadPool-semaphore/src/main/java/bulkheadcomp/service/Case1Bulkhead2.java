@@ -9,7 +9,7 @@ import io.github.resilience4j.bulkhead.BulkheadFullException;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 
 @Component
-public class ComparatorService {
+public class Case1Bulkhead2 {
 	
 	@Bulkhead(name = "Test1", fallbackMethod = "bulkheadFallBackMethod1")
 	public String executeWithSemaphore() {
