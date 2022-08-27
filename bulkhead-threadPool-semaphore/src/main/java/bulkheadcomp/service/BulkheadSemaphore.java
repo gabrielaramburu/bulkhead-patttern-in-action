@@ -6,16 +6,18 @@ import io.github.resilience4j.bulkhead.BulkheadFullException;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 
 @Component
-public class Case1Service {
+public class BulkheadSemaphore {
 
 	@Bulkhead(name = "Case1", fallbackMethod = "bulkheadFallBackMethod1")
-	public void executeWithSemaphore() {
+	public String executeWithSemaphore() {
 		System.out.println("Bulkhead, Executing semaphore implementation. " + Thread.currentThread().getName());
 		doSomething();
+		return "ok";
 	}
 	
-	public void bulkheadFallBackMethod1 (BulkheadFullException e) {
+	public String bulkheadFallBackMethod1 (BulkheadFullException e) {
 		System.out.println("Bulkhead fallback " + e.getMessage() + Thread.currentThread().getName());
+		return "error";
 	}
 	
 	private void doSomething() {

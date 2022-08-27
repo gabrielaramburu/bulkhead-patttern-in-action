@@ -9,20 +9,19 @@ import io.github.resilience4j.bulkhead.BulkheadFullException;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 
 @Component
-public class Service3 {
+public class Service4 {
 	private static final int DELAY = 5000;
 	
-	
-	@Bulkhead(name = "Service3", fallbackMethod = "futureFallback")
 	@Async
+	@Bulkhead(name = "Service4", fallbackMethod = "futureFallback")
 	public CompletableFuture<String> doSomeWork() {
-		System.out.println("Excecuting service 3 - " + Thread.currentThread().getName());	
+		System.out.println("Excecuting service 4 - " + Thread.currentThread().getName());	
 		Util.pause(DELAY);
 		return CompletableFuture.completedFuture("ok");
 	}
 	
 	public CompletableFuture<String> futureFallback(BulkheadFullException ex) {
-		System.out.println("Service 3 - Request rejected, bulkhead is full: " + Thread.currentThread().getName());
+		System.out.println("Service 4 - Request rejected, bulkhead is full: " + Thread.currentThread().getName());
         return CompletableFuture.completedFuture("error");
     }
 	

@@ -1,15 +1,31 @@
 resilience4j.bulkhead:
-  instances:
-    Case1:
-      maxConcurrentCalls: 4
-      maxWaitDuration: 10ms
-       
-            
+   instances:
+      Case1:
+         maxConcurrentCalls: 4
+         maxWaitDuration: 10ms
+      Service3:
+         maxConcurrentCalls: 2
+         maxWaitDuration: 10ms
+      Service4:
+         maxConcurrentCalls: 2
+         maxWaitDuration: 10ms
+
 resilience4j.thread-pool-bulkhead:
-    instances:
-        Test2:
-            coreThreadPoolSize: 4
-            maxThreadPoolSize: 4
-            queueCapacity: 1
-            
-            
+   instances:
+      Case2:
+         coreThreadPoolSize: 4
+         maxThreadPoolSize: 4
+         queueCapacity: 0
+      Case3:
+         coreThreadPoolSize: 4
+         maxThreadPoolSize: 4
+         queueCapacity: 2
+      Service1:
+         coreThreadPoolSize: 2
+         maxThreadPoolSize: 2
+         queueCapacity: 1
+      Service2:
+         coreThreadPoolSize: 2
+         maxThreadPoolSize: 2
+         queueCapacity: 1
+      
