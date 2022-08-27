@@ -8,10 +8,12 @@ import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 @Component
 public class BulkheadSemaphore {
 
+	private static final long DELAY = 3000;
+
 	@Bulkhead(name = "Case1", fallbackMethod = "bulkheadFallBackMethod1")
 	public String executeWithSemaphore() {
 		System.out.println("Bulkhead, Executing semaphore implementation. " + Thread.currentThread().getName());
-		doSomething();
+		Util.mockExternalServiceHttpCall(DELAY);
 		return "ok";
 	}
 	
@@ -20,7 +22,5 @@ public class BulkheadSemaphore {
 		return "error";
 	}
 	
-	private void doSomething() {
-		Util.pause(5000);
-	}
+	
 }

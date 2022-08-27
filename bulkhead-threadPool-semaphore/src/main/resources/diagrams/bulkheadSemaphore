@@ -1,0 +1,21 @@
+@startuml
+
+
+participant Client
+box Server #lightblue
+participant Controller
+participant Semaphore <<Bulkhead>>
+end box
+participant Service
+
+Client -> Controller 
+Controller -> Semaphore ** : adquire
+alt available thread
+	Controller -> Service 
+	Service -> Controller
+	Controller -[#blue]> Client : ok
+else bulkhead is full
+	Controller -[#red]> Client : error
+end
+
+@enduml

@@ -12,12 +12,11 @@ import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 public class Service3 {
 	private static final int DELAY = 5000;
 	
-	
 	@Bulkhead(name = "Service3", fallbackMethod = "futureFallback")
 	@Async
 	public CompletableFuture<String> doSomeWork() {
 		System.out.println("Excecuting service 3 - " + Thread.currentThread().getName());	
-		Util.pause(DELAY);
+		Util.mockExternalServiceHttpCall(DELAY);
 		return CompletableFuture.completedFuture("ok");
 	}
 	

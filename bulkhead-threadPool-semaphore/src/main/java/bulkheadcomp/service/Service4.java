@@ -16,7 +16,7 @@ public class Service4 {
 	@Bulkhead(name = "Service4", fallbackMethod = "futureFallback")
 	public CompletableFuture<String> doSomeWork() {
 		System.out.println("Excecuting service 4 - " + Thread.currentThread().getName());	
-		Util.pause(DELAY);
+		Util.mockExternalServiceHttpCall(DELAY);
 		return CompletableFuture.completedFuture("ok");
 	}
 	

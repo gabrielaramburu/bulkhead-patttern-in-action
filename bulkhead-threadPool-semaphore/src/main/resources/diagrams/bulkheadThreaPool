@@ -1,0 +1,37 @@
+@startuml
+participant Client
+box Server #lightblue
+participant Controller
+participant ThreadPool <<Bulkhead>>
+participant Thread
+end box
+participant Service
+participant ServiceB
+
+Client -> Controller 
+activate Controller #FFBBBB
+Controller -> ThreadPool ** : execute
+
+alt available thread
+activate Controller #DarkSalmon
+Controller --> Controller : waiting for response
+ThreadPool -> Thread **: new/from pool
+	Thread -> Service ++ #gold:
+	Service -> Thread -- :.
+	Thread --> Controller : CompletableFuture End
+deactivate Controller
+else queue is full
+	ThreadPool -[#red]> Controller : error
+end
+deactivate Controller
+
+== Same as above with other Service/s call/s ==
+
+Controller --> Controller ++: build response
+Controller -[#blue]> Client : ok
+
+note right
+After to analize each response you may
+return ok/error or take some compensating action
+end note
+@enduml

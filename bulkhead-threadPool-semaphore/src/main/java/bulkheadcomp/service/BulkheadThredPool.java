@@ -12,10 +12,12 @@ import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 public class BulkheadThredPool {
 	
 	
+	private static final long DELAY = 3000;
+
 	@Bulkhead(name = "Case2", fallbackMethod = "futureFallback", type = Bulkhead.Type.THREADPOOL )
 	public CompletableFuture<String> executeWithThreadPoolUnboundedQueue() {
 		System.out.println("Bulkhead, Executing ThreadPool Unbounded Queue. " + Thread.currentThread().getName());
-		doSomething();
+		Util.mockExternalServiceHttpCall(DELAY);
 		return CompletableFuture.completedFuture("");
 	}
 	
@@ -24,7 +26,7 @@ public class BulkheadThredPool {
 	@Bulkhead(name = "Case3", fallbackMethod = "futureFallback", type = Bulkhead.Type.THREADPOOL )
 	public CompletableFuture<String>  executeWithThreadPoolBoundedQueue() {
 		System.out.println("Bulkhead, Executing ThreadPool bounded Queue. " + Thread.currentThread().getName());
-		doSomething();
+		Util.mockExternalServiceHttpCall(DELAY);
 		return CompletableFuture.completedFuture("");
 	}
 
@@ -33,7 +35,4 @@ public class BulkheadThredPool {
         return CompletableFuture.completedFuture("Recovered specific TimeoutException: " + ex.toString());
     }
 	
-	private void doSomething() {
-		Util.pause(5000);
-	}
 }

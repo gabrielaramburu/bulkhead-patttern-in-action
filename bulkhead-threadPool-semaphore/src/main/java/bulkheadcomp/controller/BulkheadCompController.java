@@ -1,5 +1,7 @@
 package bulkheadcomp.controller;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 
@@ -14,6 +16,7 @@ import bulkheadcomp.service.BulkheadThredPool;
 import bulkheadcomp.service.Service1;
 import bulkheadcomp.service.Service2;
 import bulkheadcomp.service.Service3;
+import bulkheadcomp.service.Service4;
 
 @RestController
 public class BulkheadCompController {
@@ -35,7 +38,7 @@ public class BulkheadCompController {
 	private Service3 service3;
 	
 	@Autowired
-	private Service3 service4;
+	private Service4 service4;
 	
 
 	@GetMapping("/bulkhead")
@@ -65,55 +68,56 @@ public class BulkheadCompController {
 	public String bulkheadThreadPoolTestBoundedQueueOrquestration() {
 		System.out.println("*** New Request, " + Thread.currentThread().getName());
 		
-		CompletableFuture<String> response1 = service1.doSomeWork();
-		CompletableFuture<String> response2 = service2.doSomeWork();
+		List<CompletableFuture<String>> responses = new ArrayList<CompletableFuture<String>>();
+			responses.add(service1.doSomeWork());
+			responses.add(service2.doSomeWork());
 		
-		System.out.println("Waiting for dependencies...");
-		CompletableFuture<Void> finalResult = CompletableFuture.allOf(response1, response2);
-		finalResult.join();
-		System.out.println("All dependencies have finished.");
-		
-		String response = executeCompensatingActions(response1, response2);
-		
-		if(response.equals("error")) {
-			//Not a good idea to mix communication protocol errors with application business errors
-			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal application error");
-		}
-		return response;
-	}
-
-	private String executeCompensatingActions(CompletableFuture<String> response1, CompletableFuture<String> response2) {
-		//TODO: In a real application, It could be necessary to implements some compensating actions.
-		try {
-			if (response1.get().equals(ERROR) || response2.get().equals(ERROR)) {
-				return ERROR;
-			} else
-				return OK;
-		} catch (InterruptedException | ExecutionException e) {
-			return ERROR;
-		}
+		return buildResponse(responses);
 	}
 	
-	
-	@GetMapping("/bulkhead-async-bounded-orquestration")
+	@GetMapping("/bulkhead-semaphore-async-orquestration")
 	public String bulkheadAsyncTestBoundedQueueOrquestration() {
 		System.out.println("*** New Request async, " + Thread.currentThread().getName());
 		
-		CompletableFuture<String> response1 = service3.doSomeWork();
-		CompletableFuture<String> response2 = service4.doSomeWork();
+		List<CompletableFuture<String>> responses = new ArrayList<CompletableFuture<String>>();
+			responses.add(service3.doSomeWork());
+			responses.add(service4.doSomeWork());
+		
+		return buildResponse(responses);
+	}
+	
+	private String buildResponse(List<CompletableFuture<String>> responses) {
 		
 		System.out.println("Waiting for dependencies...");
-		CompletableFuture<Void> finalResult = CompletableFuture.allOf(response1, response2);
+		CompletableFuture<Void> finalResult = CompletableFuture.allOf(responses.toArray(new CompletableFuture[0]));
+		
 		finalResult.join();
 		System.out.println("All dependencies have finished.");
 		
-		String response = executeCompensatingActions(response1, response2);
 		
-		if(response.equals("error")) {
+		if(errorFound(responses)) {
 			//Not a good idea to mix communication protocol errors with application business errors
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal application error");
-		}
-		return response;
+		} else return OK;
+
+	}
+	
+	private boolean errorFound(List<CompletableFuture<String>> response) {
+		//TODO: In a real application, It could be necessary to implements some compensating actions.
+		
+		if (response.stream().anyMatch(resp -> {
+			try {
+				return resp.get().equals(ERROR);
+			} catch (InterruptedException e) {
+				return true;
+			} catch (ExecutionException e) {
+				return true;
+			}
+		})) {
+			return true;
+		} else  {
+			return false;
+		}		
 	}
 	
 }
