@@ -1,0 +1,17 @@
+@startuml
+
+participant SimpleAsyncTaskExecutor as s
+participant Thread as t
+participant Semaphore as b
+participant Instance as i
+
+[-> s
+s -> t ** : new
+t-> b : adquiere
+b --> t: ok
+t -> i: @Async method
+
+
+
+
+@enduml
