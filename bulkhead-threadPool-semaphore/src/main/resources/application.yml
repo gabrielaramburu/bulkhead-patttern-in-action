@@ -15,11 +15,11 @@ resilience4j.thread-pool-bulkhead:
       Case2:
          coreThreadPoolSize: 4
          maxThreadPoolSize: 4
-         queueCapacity: 0
+         queueCapacity: 2
       Case3:
          coreThreadPoolSize: 4
          maxThreadPoolSize: 4
-         queueCapacity: 2
+         queueCapacity: 0
       Service1:
          coreThreadPoolSize: 2
          maxThreadPoolSize: 2

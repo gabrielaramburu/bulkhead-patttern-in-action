@@ -19,7 +19,7 @@ import bulkheadcomp.service.Service3;
 import bulkheadcomp.service.Service4;
 
 @RestController
-public class BulkheadCompController {
+public class BulkheadController {
 	private static final String ERROR = "error";
 	private static final String OK = "ok";
 	
@@ -52,18 +52,22 @@ public class BulkheadCompController {
 		return response;
 	}
 	
-	@GetMapping("/bulkhead-threadPool-unbounded")
-	public String bulkheadThreadPoolTestUnboundedQueue() {
-		test2.executeWithThreadPoolUnboundedQueue();
+	@GetMapping("/bulkhead-threadPool-bounded")
+	public String bulkheadThreadPoolTestBoundedQueue() {
+		//do somework
+		test2.executeWithThreadPoolBoundedQueue();
+		//do somework
 		return OK;
 	}
 	
-	@GetMapping("/bulkhead-threadPool-bounded")
-	public String bulkheadThreadPoolTestBoundedQueue() {
-		test2.executeWithThreadPoolBoundedQueue();
+	@GetMapping("/bulkhead-threadPool-unbounded")
+	public String bulkheadThreadPoolTestUnboundedQueue() {
+		//do somework
+		test2.executeWithThreadPoolUnboundedQueue();
+		//do somework
 		return OK;
 	}
-
+	
 	@GetMapping("/bulkhead-threadPool-bounded-orquestration")
 	public String bulkheadThreadPoolTestBoundedQueueOrquestration() {
 		System.out.println("*** New Request, " + Thread.currentThread().getName());

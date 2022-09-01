@@ -18,7 +18,7 @@ public class BulkheadSemaphore {
 	}
 	
 	public String bulkheadFallBackMethod1 (BulkheadFullException e) {
-		System.out.println("Bulkhead fallback " + e.getMessage() + Thread.currentThread().getName());
+		//System.out.println(e.getMessage() + " " + Thread.currentThread().getName());
 		return "error";
 	}
 	
