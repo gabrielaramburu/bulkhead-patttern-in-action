@@ -1,0 +1,20 @@
+@startuml
+participant Client <<JMeter>>
+Client -> Service: sync call
+
+
+Service -[#blue]> Service2: asynchronous call
+activate Service2
+note left 
+using 
+<color #blue>threadPoolBulkhead</color>
+end note
+
+Service --> Client: response
+hnote over Service
+Service is not intreseted in 
+Service2 response
+end note
+Service2-->Service !!
+deactivate Service2
+@enduml

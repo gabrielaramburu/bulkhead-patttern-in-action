@@ -1,0 +1,23 @@
+@startuml
+participant Client <<JMeter>>
+participant Service <<Orchestrator>>
+Client -> Service: sync call
+Service -> Service2: async call 1 <color #blue>[Bulkhead Service2]</color>
+Service -> Service3: async call 2 <color #blue>[Bulkhead Service3]</color>
+hnote over Client: idle
+loop waiting for all responses
+ activate Service #salmon
+Service3 --> Service: response 2
+Service2 --> Service: response 1
+
+end loop
+
+Service --> Service : analize result
+note right
+probably applies
+some compensating actions
+end note
+Service -> Client
+deactivate Service
+
+@enduml

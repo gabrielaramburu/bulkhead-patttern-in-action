@@ -1,0 +1,15 @@
+@startuml
+participant Client <<JMeter>>
+Client -> Service: sync call
+
+Service -[#red]> Service2: sync call
+note left 
+using 
+<color #red>semaphoreBulkhead</color>
+end note
+hnote over Service:idle
+Service2 --> Service
+
+Service --> Client: response
+
+@enduml

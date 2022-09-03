@@ -7,9 +7,11 @@ participant Instance as i
 
 [-> s
 s -> t ** : new
-t-> b : adquiere
+activate t #gold
+t-> b : adquire
 b --> t: ok
 t -> i: @Async method
+deactivate t
 
 
 
