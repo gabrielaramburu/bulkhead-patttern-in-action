@@ -9,7 +9,7 @@ import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 
 @Component
 public class Service2 {
-	private static final int DELAY = 5000;
+	private static final int DELAY = 3000;
 	
 	@Bulkhead(name = "Service2", fallbackMethod = "futureFallback", type = Bulkhead.Type.THREADPOOL )
 	public CompletableFuture<String> doSomeWork() {

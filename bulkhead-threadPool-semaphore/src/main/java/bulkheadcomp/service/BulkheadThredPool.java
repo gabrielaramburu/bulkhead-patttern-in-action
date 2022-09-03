@@ -1,8 +1,8 @@
 package bulkheadcomp.service;
 
+import java.time.Instant;
 import java.util.concurrent.CompletableFuture;
 
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Component;
 
 import io.github.resilience4j.bulkhead.BulkheadFullException;
@@ -23,7 +23,7 @@ public class BulkheadThredPool {
 	
 	@Bulkhead(name = "Case3", fallbackMethod = "futureFallback", type = Bulkhead.Type.THREADPOOL )
 	public CompletableFuture<String> executeWithThreadPoolUnboundedQueue() {
-		System.out.println("Bulkhead, Executing ThreadPool Synchronous Queue. " + Thread.currentThread().getName());
+		System.out.println(Instant.now().getEpochSecond() + "  Bulkhead, Executing ThreadPool Synchronous Queue. " + Thread.currentThread().getName());
 		Util.mockExternalServiceHttpCall(DELAY);
 		return CompletableFuture.completedFuture("ok");
 	}

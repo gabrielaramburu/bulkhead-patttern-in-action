@@ -102,7 +102,10 @@ public class BulkheadController {
 		if(errorFound(responses)) {
 			//Not a good idea to mix communication protocol errors with application business errors
 			throw new ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, "Internal application error");
-		} else return OK;
+		} else {
+			System.out.println("Response to client: ok");
+			return OK;
+		}
 
 	}
 	

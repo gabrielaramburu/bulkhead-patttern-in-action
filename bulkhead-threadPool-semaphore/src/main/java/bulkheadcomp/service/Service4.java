@@ -17,6 +17,7 @@ public class Service4 {
 	public CompletableFuture<String> doSomeWork() {
 		System.out.println("Excecuting service 4 - " + Thread.currentThread().getName());	
 		Util.mockExternalServiceHttpCall(DELAY);
+		System.out.println("End service 4");
 		return CompletableFuture.completedFuture("ok");
 	}
 	
